@@ -2,13 +2,16 @@
 
 var program = require('commander'),
     Pennergame = require('../lib/Pennergame'),
+    formatTime = require('../lib/utils').formatTime,
     game;
 
 program
     .version(require('../package').version)
     .option('-u, --username <username>', 'Your username')
     .option('-p, --password <password>', 'Your password')
-    .option('-c, --city <city>', 'The City to log into');
+    .option('-c, --city <city>', 'The City to log into. Default: Hamburg')
+    .option('-t, --time <minutes>', 'How long each collect should be.' +
+            ' Default: 10', parseInt, 10);
 
 program.parse(process.argv);
 
@@ -40,6 +43,10 @@ if (program.city && valid_cities.indexOf(program.city) === -1) {
     process.exit(1);
 }
 
+console.log('Try to log into %s as: %s',
+            program.city || 'Hamburg',
+            program.username);
+
 game = new Pennergame({
     username: program.username,
     password: program.password
@@ -50,5 +57,17 @@ game.on('error', function (errors) {
 });
 
 game.on('loggedin', function (username, city) {
-    console.log('Logged into %s as: %s', city, username);
+    console.log('Logged into %s as: %s',
+                program.city || 'Hamburg',
+                program.username);
+
+    game.collect(program.time);
+});
+
+game.on('start_collect', function (remaining_seconds) {
+    console.log('Started collecting for %s Minutes', formatTime(remaining_seconds));
+});
+
+game.on('pending_collect', function (remaining_seconds) {
+    console.log('Still collecting for %s Minutes', formatTime(remaining_seconds));
 });

@@ -2,6 +2,7 @@
   "name": "pennergame-bottle-collector",
   "version": "1.0.0",
   "description": "A bottlecollect bot for pennergame.de",
+  "preferGlobal": true,
   "main": "./lib/Pennergame.js",
   "bin": {
     "pbbcb": "./bin/pbbcb.js"
@@ -31,5 +32,7 @@
     "email": "starflow@list.ru",
     "url": "https://free-hack.com/member.php?46818-Starflow"
   },
+  "bugs": "https://github.com/starflow/pennergame-bottle-collector/issues",
+  "repository": "starflow/pennergame-bottle-collector",
   "license": "ISC"
 }
