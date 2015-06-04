@@ -66,8 +66,18 @@ game.on('loggedin', function (username, city) {
 
 game.on('start_collect', function (remaining_seconds) {
     console.log('Started collecting for %s Minutes', formatTime(remaining_seconds));
+    setTimeout(function () { game.clear_cart(); }, remaining_seconds * 1000);
 });
 
 game.on('pending_collect', function (remaining_seconds) {
     console.log('Still collecting for %s Minutes', formatTime(remaining_seconds));
+    setTimeout(function () { game.clear_cart(); }, remaining_seconds * 1000);
+});
+
+game.on('clear_cart', function () {
+    game.collect(program.time);
+});
+
+game.on('pending_cart', function () {
+    game.clear_cart();
 });
