@@ -12,7 +12,7 @@ It will automaticly login to the Game and then start the following Circle:
 
 ## Requirements
 
-* Working io.js installation >= 2.1.0
+* Working [io.js] installation >= 2.1.0
 * [Pennergame] Account
 
 
@@ -27,4 +27,5 @@ It will automaticly login to the Game and then start the following Circle:
 
 
 
+[io.js]: https://iojs.org "io.js Website"
 [Pennergame]: http://pennergame.de "Pennergame Website"
